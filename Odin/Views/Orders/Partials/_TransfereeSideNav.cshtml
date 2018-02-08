@@ -34,12 +34,15 @@
                     <label>Dashboard</label>
                 </a>
             </li>
-            <li class="item nav-item" data-panel="housing">
-                <a href="#housing">
-                    <img src="~/Content/Images/icn_housing.png"/>
-                    <label>Housing</label>
-                </a>
-            </li>
+            @if(Model.HasHomeFinding)
+            {
+                <li class="item nav-item" data-panel="housing">
+                    <a href="#housing">
+                        <img src="~/Content/Images/icn_housing.png"/>
+                        <label>Housing</label>
+                    </a>
+                </li>
+            }
             <li class="item nav-item" data-panel="itinerary">
                 <a href="#itinerary">
                     <img src="~/Content/Images/icn_internal_itinerary.png"/>

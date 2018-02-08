@@ -466,5 +466,7 @@ namespace Odin.ViewModels.Orders.Transferee
         [DisplayFormat(NullDisplayText = "There are currently no notes.")]
         public string ProgramNotes { get; set; }
 
+        public bool HasHomeFinding { get; set; }
+
     }
 }

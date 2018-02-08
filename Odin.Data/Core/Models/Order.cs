@@ -112,12 +112,17 @@ namespace Odin.Data.Core.Models
             return Services.FirstOrDefault<Service>(s => s.ServiceTypeId == serviceTypeId);
         }
 
+        public bool HasHomeFinding
+        {
+            get { return HomeFinding != null && (ServiceFlag & (int) ServiceCategory.AccompaniedHomeFinding) > 0; }
+        }
+
         public IEnumerable<Service> HomeFindingServices
         {
             get
             {
                 List<Service> hfServices;
-                if (HomeFinding != null)
+                if (HasHomeFinding)
                 {
                     hfServices = new List<Service>()
                     {

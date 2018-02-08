@@ -43,12 +43,15 @@
                     <label>Service Reporting</label>
                 </a>
             </li>
-            <li class="item nav-item" data-panel="housing">
-                <a href="#housing">
-                    <img src="~/Content/Images/icn_housing.png" />
-                    <label>Housing</label>
-                </a>
-            </li>
+            @if (Model.HasHomeFinding)
+            {
+                <li class="item nav-item" data-panel="housing">
+                    <a href="#housing">
+                        <img src="~/Content/Images/icn_housing.png"/>
+                        <label>Housing</label>
+                    </a>
+                </li>
+            }
             <li class="item nav-item" data-panel="history">
                 <a href="#history">
                     <img src="~/Content/Images/icn_history.png" />
