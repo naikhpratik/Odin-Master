@@ -209,7 +209,7 @@ namespace Odin.Controllers.Api
         public IHttpActionResult DeleteChild(string id)
         {
             var userId = User.Identity.GetUserId();
-            var child = _unitOfWork.Children.GetChildFor(userId,id);
+            var child = _unitOfWork.Children.GetChildFor(userId,id,User.GetUserRole());
 
             if (child == null)
             {
@@ -357,7 +357,7 @@ namespace Odin.Controllers.Api
         public IHttpActionResult DeletePet(string id)
         {
             var userId = User.Identity.GetUserId();
-            var pet = _unitOfWork.Pets.GetPetFor(userId, id);
+            var pet = _unitOfWork.Pets.GetPetFor(userId, id, User.GetUserRole());
 
             if (pet == null)
             {

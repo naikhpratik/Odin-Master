@@ -4,6 +4,6 @@ namespace Odin.Data.Core.Repositories
 {
     public interface IChildrenRepository
     {
-        Child GetChildFor(string userId, string id);
+        Child GetChildFor(string userId, string id, string userRole);
     }
 }
