@@ -113,7 +113,7 @@ namespace Odin.Domain
             }
 
             //Include unaccompanied too?
-            if ((order.ServiceFlag & (int)ServiceCategory.AccompaniedHomeFinding) > 0 && order.HomeFinding == null)
+            if ( ((order.ServiceFlag & (int)ServiceCategory.AccompaniedHomeFinding) > 0 || (order.ServiceFlag & (int)ServiceCategory.UnAccompaniedHomeFinding) > 0) && order.HomeFinding == null)
             {
                 var homeFinding = new HomeFinding
                 {

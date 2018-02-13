@@ -114,7 +114,7 @@ namespace Odin.Data.Core.Models
 
         public bool HasHomeFinding
         {
-            get { return HomeFinding != null && (ServiceFlag & (int) ServiceCategory.AccompaniedHomeFinding) > 0; }
+            get { return HomeFinding != null && ((ServiceFlag & (int) ServiceCategory.AccompaniedHomeFinding) > 0 || (ServiceFlag & (int)ServiceCategory.UnAccompaniedHomeFinding) > 0); }
         }
 
         public IEnumerable<Service> HomeFindingServices
