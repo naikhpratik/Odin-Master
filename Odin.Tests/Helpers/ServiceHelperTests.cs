@@ -27,11 +27,5 @@ namespace Odin.Tests.Helpers
             result.Count().Should().Be(0);
         }
 
-        [TestMethod]
-        [TestCategory("UI")]
-        public void FakeTest()
-        {
-            Assert.Fail();
-        }
     }
 }
