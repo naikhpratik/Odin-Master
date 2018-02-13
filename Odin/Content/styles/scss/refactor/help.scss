@@ -1,0 +1,208 @@
+﻿@import "./definitions.scss";
+
+
+body {
+    padding: 0px;
+
+    div.container-fluid {
+        padding: 0px;
+    }
+}
+
+div#help {
+    height: auto;
+    padding-bottom: 4.5rem;
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    background-color: white;
+    margin-top: $primaryNavHeightSm;
+
+    #helpSection {
+        margin: 3rem 3rem 3rem;
+    }
+
+    .btnRow{
+        width:100%;
+        text-align:center;
+    }
+
+    .helpRow {
+        padding-top: 2rem;
+
+        img {
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        }
+    }
+
+    li.helpItem {
+        padding-bottom: 1.5rem;
+
+        .helpNum {
+            color: $DW_Lime;
+            float: left;
+            width: 1.5rem;
+        }
+
+        .helpDesc {
+            margin-left: 1.5rem;
+        }
+    }
+}
+
+.titleGroup {
+    margin-bottom: 5rem;
+}
+
+.sectionTitle {
+    padding-bottom: 0px;
+    margin: 2rem 0 1rem 0;
+    font-size: 2.5rem;
+    color: #231F20;
+}
+
+.sectionSubHead {
+    margin: 1rem 0 0.5rem 0;
+    font-size: 1.725rem;
+    font-weight: 400;
+    color: #8e1a55;
+    display: inline-block;
+}
+
+.sectionSave, .sectionAdd {
+    font-size: small;
+    color: $DW_Lime;
+    cursor: pointer;
+}
+
+.sectionDelete {
+    font-size: small;
+    color: $DW_Red;
+    cursor: pointer;
+}
+
+.sectionInstruction {
+    color: #35A2DB;
+    font-size: 16px;
+}
+
+.sectionList {
+    list-style: none;
+    line-height: 1.875rem;
+    margin: 1rem 0 0 0;
+    padding: 0;
+
+    li {
+        margin-bottom: 1rem;
+        padding: 0;
+
+        label {
+            display: block;
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: #858585;
+            padding: 0;
+            margin: 0;
+        }
+
+        p {
+            color: #35A2DB;
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin: 0;
+            padding: 0 1.25rem 0 0;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+            -ms-word-break: break-all;
+            word-break: break-all;
+            word-break: break-word;
+        }
+
+        .input-group > input {
+            color: #35A2DB;
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin: 0;
+        }
+    }
+
+    @media screen and (min-width: 62rem) {
+        label.mobileLabel {
+            display: none;
+        }
+    }
+}
+
+/*.sectionTitle {
+    padding-bottom: 0px;
+    margin: 2rem 0 1rem 0;
+    font-size: 2.5rem;
+    color: #231F20;
+}
+
+.sectionSubHead {
+    margin: 1rem 0 0.5rem 0;
+    font-size: 1.725rem;
+    font-weight: 400;
+    color: #8e1a55;
+    display: inline-block;
+}
+
+.sectionSave {
+    font-size: small;
+    color: $DW_Lime;
+    cursor: pointer;
+}
+
+.sectionInstruction {
+    color: #35A2DB;
+    font-size: 16px;
+}
+
+.sectionList {
+    list-style: none;
+    line-height: 1.875rem;
+    margin: 1rem 0 0 0;
+    padding: 0;
+
+    li {
+        margin-bottom: 1rem;
+        padding: 0;
+
+        label {
+            display: block;
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: #858585;
+            padding: 0;
+            margin: 0;
+        }
+
+        p {
+            color: #35A2DB;
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin: 0;
+            padding: 0 1.25rem 0 0;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+            -ms-word-break: break-all;
+            word-break: break-all;
+            word-break: break-word;
+        }
+
+        .input-group > input {
+            color: #35A2DB;
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin: 0;
+        }
+    }
+
+    @media screen and (min-width: 62rem) {
+        label.mobileLabel {
+            display: none;
+        }
+    }
+}*/

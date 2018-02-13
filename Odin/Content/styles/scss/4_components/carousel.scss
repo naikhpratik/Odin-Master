@@ -1,0 +1,53 @@
+﻿/* Plugin styles */
+ul.thumbnails-carousel {
+    padding: 5px 0 0 0;
+    margin: 0;
+    list-style-type: none;
+    text-align: center;
+}
+
+ul.thumbnails-carousel .center {
+    display: inline-block;
+}
+
+ul.thumbnails-carousel li {
+    margin-right: 5px;
+    float: left;
+    cursor: pointer;
+}
+
+ul.thumbnails-carousel li img {
+    max-width: 75px;
+}
+
+.controls-background-reset {
+    background: none !important;
+}
+
+.active-thumbnail {
+    opacity: 0.4;
+}
+
+.indicators-fix {
+    bottom: 70px;
+}
+
+.carousel-inner {
+    height: 350px;
+    width: 100%;
+}
+
+.carousel-inner .item {
+    height: 100%;
+}
+
+.carousel-inner .item > img {
+    max-height: 100%;
+    max-width: 100%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}

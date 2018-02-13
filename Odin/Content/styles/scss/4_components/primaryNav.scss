@@ -1,0 +1,259 @@
+﻿#primaryNav {
+    position: fixed;
+    z-index: 1010;
+    height: $primaryNavHeightSm;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    border-bottom: 2px solid #c9c9c9;
+    padding: 0 1rem;
+    top: 0;
+
+
+    @media screen and (min-width: 48rem) {
+        height: $primaryNavHeightLg;
+        max-width: 1440px;
+    }
+}
+
+
+ul.primaryNavIconList {
+    list-style: none;
+    display: flex;
+    margin-bottom: 0;
+    padding: 0 0 0 0;
+
+    li.primaryNavIconList__item {
+        position: static;
+        padding: 0.5rem;
+        margin-right: 1rem;
+        border-radius: 50%;
+        cursor: pointer;
+
+        @media screen and (min-width: 48rem) {
+            padding: 1rem;
+        }
+
+        &:last-child {
+            margin-right: 0rem;
+        }
+
+        &:hover {
+            box-shadow: 0px 0px 3px rgba(0,0,0,0.3);
+        }
+
+        span {
+            $notificationsSize: 1.25rem;
+            position: absolute;
+            top: 1rem;
+            right: 5rem;
+            background-color: $DW_Red;
+            color: white;
+            padding: calc(#{$notificationsSize}/2);
+            font-size: $notificationsSize;
+            height: calc(#{$notificationsSize}*1.5);
+            min-width: calc(#{$notificationsSize}*1.5);
+            line-height: calc(#{$notificationsSize}/2);
+            border-radius: calc(#{$notificationsSize}*.75);
+
+            @media screen and (min-width: 48rem) {
+                right: 6rem;
+            }
+        }
+
+        img {
+            width: $logoHeight;
+            height: $logoHeight;
+        }
+    }
+}
+
+#profileDropDown {
+    ul.dropdown-menu {
+        .divider {
+            margin: 0px;
+        }
+
+        li {
+            margin: .5rem 0 .5rem 0;
+        }
+    }
+}
+
+
+a.dw_logo {
+    display: flex;
+    text-decoration: none;
+    align-items: center;
+
+    img.primaryNavHome__logo--mobile {
+        display: block;
+        height: $logoHeight;
+        width: auto;
+        text-decoration: none;
+        margin-right: 0.325rem;
+    }
+
+    img.primaryNavHome__logo {
+        display: none;
+    }
+
+    > p {
+        text-decoration: none;
+        line-height: $logoHeight;
+        height: $logoHeight;
+        color: $DW_Green;
+        font-size: 2rem;
+        font-weight: 300;
+        margin: 0 0 0 0; //die bootstrap die
+        padding: 0 0 0 0; //die bootstrap die
+        padding-left: 0.5rem;
+        margin-left: 0.5rem;
+        border-left: 1px solid #acacac;
+    }
+
+    @media screen and (min-width: 48rem) {
+        margin-left: 0.5rem;
+
+        img.primaryNavHome__logo--mobile {
+            display: none;
+        }
+
+        img.primaryNavHome__logo {
+            display: block;
+            height: $logoHeight;
+            width: auto;
+            padding-right: 0.325rem;
+        }
+    }
+
+    &:hover {
+        > p {
+            text-decoration: none;
+        }
+    }
+}
+
+.centered_logo {
+    display: flex;
+    justify-content: center;
+    margin: 3rem 0;
+}
+
+//--------------------------------------------------
+
+/* Bootstrap Overrides */
+.notification-dropdown {
+    box-shadow: none;
+    overflow-y: scroll;
+    max-height: 50vh;
+    -webkit-box-shadow: none;
+    position: absolute;
+    font-size: small;
+    left: 0;
+    width: 100vw;
+
+    @media screen and (min-width: 40rem) {
+        right: 0;
+        left: auto;
+        width: 400px;
+    }
+}
+
+
+
+.notification-dropdown > li.notifications_unread {
+    border-bottom: solid;
+    width: 100%;
+    border-bottom-color: darkgray;
+    border-bottom-width: medium;
+    background-image: url('/Content/Images/icn_attention.png');
+    background-size: 90px;
+    background-repeat: no-repeat;
+    padding-left: 100px;
+    text-wrap: none;
+    height: 90px;
+    display: inline-block;
+    content: "x";
+    color: #999;
+    background-color: lightgray;
+}
+
+.notification-dropdown > li.notifications_read {
+    border-bottom: solid;
+    width: 100%;
+    border-bottom-color: lightgray;
+    border-bottom-width: medium;
+    background-image: url('/Content/Images/icn_attention.png');
+    background-size: 90px;
+    background-repeat: no-repeat;
+    padding-left: 100px;
+    text-wrap: none;
+    height: 90px;
+    display: inline-block;
+    content: "x";
+    color: #999;
+}
+
+.notification-dropdown > li.notifications_unread_message {
+    border-bottom: solid;
+    width: 100%;
+    border-bottom-color: darkgray;
+    border-bottom-width: medium;
+    background-image: url('/Content/Images/icn_msg.png');
+    background-size: 90px;
+    background-repeat: no-repeat;
+    padding-left: 100px;
+    text-wrap: none;
+    height: 90px;
+    display: inline-block;
+    content: "x";
+    color: #999;
+    background-color: lightgray;
+}
+
+.notification-dropdown > li.notifications_read_message {
+    border-bottom: solid;
+    width: 100%;
+    border-bottom-color: lightgray;
+    border-bottom-width: medium;
+    background-image: url('/Content/Images/icn_msg.png');
+    background-size: 90px;
+    background-repeat: no-repeat;
+    padding-left: 100px;
+    text-wrap: none;
+    height: 90px;
+    display: inline-block;
+    content: "x";
+    color: #999;
+}
+
+
+.notification-close-read {
+    display: block;
+}
+
+.notification-close-unread {
+    display: none;
+}
+
+.notification-dropdown > li > a.notifications {
+    color: red;
+    font-weight: bold;
+    white-space: nowrap;
+    display: inline;
+}
+
+.notification-dropdown > li > label.notifications {
+    float: right;
+    text-align: right;
+    padding-right: 8px;
+    cursor: pointer;
+}
+
+#logoutForm {
+    display: none;
+}
+

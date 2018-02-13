@@ -1,9 +1,9 @@
 ﻿﻿var TransfereeHousingController = function (TransfereeHousingProperty) {
 
-﻿    var _map;
-﻿    var _markerDict = {};
+    var _map;
+    var _markerDict = {};
 
-﻿    var init = function () {
+    var init = function () {
         console.log("Loading Housing");
 
         setupLikeDislikeControls();
@@ -56,7 +56,7 @@
         _map = L.mapquest.map('map', {
             center: [37.7749, -122.4194],
             layers: L.mapquest.tileLayer('map'),
-            zoom: 10
+            zoom: 8
         });
 
 
@@ -103,15 +103,15 @@
         });
 
         if (!isNaN(centLat) && !isNaN(centLng)) {
-            _map.setView(new L.LatLng(centLat, centLng), 10);
-        } 
+            _map.setView(new L.LatLng(centLat, centLng), 9);
+        }
 
         //For some reason need to set height then call invalidateSize to get map displaying correctly.
         //Hacky, works now, look for better solution.
         mapDiv.height(300);
         _map.invalidateSize(false);
     };
-
+    
     var setupPropertiesList = function () {
 
         setupDatePickers();
@@ -143,20 +143,68 @@
                 case "liked":
                     propList.find(".propertyItem[data-liked='True']").css("display", "block");
                     propList.find(".propertyItem:not([data-liked='True'])").css("display", "none");
+                   
+                    $('#propertiesList').find(".propertyItem[data-liked='True']").each(function (index) {
+
+                        var propId = this.getAttribute('data-property-id');
+                        if (propId in _markerDict) {
+                            _map.addLayer(_markerDict[propId]);
+                        }
+                    });
+                    $('#propertiesList').find(".propertyItem:not([data-liked='True'])").each(function (index) {
+                        var propId = this.getAttribute('data-property-id');
+                        if (propId in _markerDict) {
+                            _map.removeLayer(_markerDict[propId]);
+                        }
+                    });
                     break;
                 case "disliked":
                     propList.find(".propertyItem[data-liked='False']").css("display", "block");
                     propList.find(".propertyItem:not([data-liked='False'])").css("display", "none");
+                    
+                    $('#propertiesList').find(".propertyItem[data-liked='False']").each(function (index) {
+                        var propId = this.getAttribute('data-property-id');
+                        if (propId in _markerDict) {
+                            _map.addLayer(_markerDict[propId]);
+                        }
+                        
+                    });
+                    $('#propertiesList').find(".propertyItem:not([data-liked='False'])").each(function (index) {
+                        var propId = this.getAttribute('data-property-id');
+                        if (propId in _markerDict) {
+                            _map.removeLayer(_markerDict[propId]);
+                        }
+                    });
                     break;
                 case "new":
                     propList.find(".propertyItem[data-liked='']").css("display", "block");
                     propList.find(".propertyItem:not([data-liked=''])").css("display", "none");
+                    
+                    $('#propertiesList').find(".propertyItem[data-liked='']").each(function (index) {
+                        var propId = this.getAttribute('data-property-id');
+                        if (propId in _markerDict) {
+                            _map.addLayer(_markerDict[propId]);
+                        }
+                    });
+                    $('#propertiesList').find(".propertyItem:not([data-liked=''])").each(function (index) {
+                        var propId = this.getAttribute('data-property-id');
+                        if (propId in _markerDict) {
+                            _map.removeLayer(_markerDict[propId]);
+                        }
+                    });
                     break;
                 case "":
+
                     propItems.css("display", "block");
+                    $('#propertiesList').find(".propertyItem").each(function (index) {
+                        var propId = this.getAttribute('data-property-id');
+                        if (propId in _markerDict) {
+                            _map.addLayer(_markerDict[propId]);
+                        }
+                    });
                     break;
             }
-           
+
         });
     };
     var setupLikeDislikeControls = function () {
@@ -170,7 +218,7 @@
             e.stopPropagation();
 
             var propertyId = $(this).data('property-id');
-            
+
             var classList = $(this)[0].classList;
 
             var triggerStatus = "";
@@ -251,7 +299,7 @@
     };
 
     var export2PDF = function (choice) {
-        window.location.href = "/Orders/PropertiesPartialPDF/" + currentOrderId + "?listChoice=" + choice;        
+        window.location.href = "/Orders/PropertiesPartialPDF/" + currentOrderId + "?listChoice=" + choice;
     };
 
     /*** Private Helpers ***/
@@ -275,7 +323,7 @@
     var reloadPropertiesPartial = function () {
         $('#propertiesContainer').load('/orders/propertiesPartial/' + currentOrderId);
     };
-    
+
     /**
      * Return all DOM elements that track the liked value for the property matching propertyId
      * @param {any} propertyId The id of the property
@@ -337,7 +385,7 @@
             error: function () {
                 toast("An unknown error has occurred.Please try again later.", "danger");
             }
-        });        
+        });
     };
 
     var deleteProperty = function (propertyId) {

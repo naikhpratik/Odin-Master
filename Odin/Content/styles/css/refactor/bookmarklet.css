@@ -1,0 +1,32 @@
+﻿html, body {
+  background-color: #fff; }
+
+.bm-message {
+  padding-bottom: 25px;
+  line-height: 25px; }
+
+.bm-container {
+  width: 100%;
+  padding: 0px 40px 0px 40px; }
+
+.bm-form-group {
+  width: 100%;
+  max-width: 100%; }
+  .bm-form-group .form-control {
+    width: 100%;
+    max-width: 100%; }
+
+.bm-sub-label {
+  color: #31a4dd; }
+
+.bm-btn-container {
+  padding-top: 10px;
+  width: 100%;
+  text-align: center; }
+
+div[data-notify].alert-success {
+  background-color: #8d0b56; }
+
+div[data-notify].alert-danger {
+  background-color: #e53c2e; }
+

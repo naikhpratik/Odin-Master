@@ -26,5 +26,6 @@ namespace Odin.Tests.Helpers
             var result = ServiceHelper.GetCategoriesForServiceFlag(serviceflag);
             result.Count().Should().Be(0);
         }
+
     }
 }

@@ -1,0 +1,214 @@
+﻿@import "./definitions.scss";
+
+$top_border_color: #979797;
+$primary_link_color: #6C6E70;
+
+
+body {
+    padding: 0px;
+
+    div.container-fluid {
+        padding: 0px;
+    }
+}
+
+.clickable, .clickablepm {
+    cursor: pointer;
+}
+
+.clickablepm{
+    margin: 2rem 0;
+    line-height:1.4rem;
+}
+
+.sortLabel {
+    text-align: center;
+}
+
+.sortPlus, .sortMinus {
+    margin-left: 1rem;
+    display: none;
+}
+
+div#list {
+    height: auto;
+    padding-bottom: 4.5rem;
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    background-color: white;
+
+    #selectPropertyManager {
+    }
+
+    #ordersTopBar {
+        margin-top: $primaryNavHeightSm;
+        padding: 2rem;
+        background-color: $DW_Lime;
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+
+        input {
+            width: 100%;
+            border: none;
+            padding: 0.5rem 1rem;
+            box-shadow: 0px 0px 0px 0px;
+
+
+            &:focus {
+                //border: 1px solid $DW_Blue;
+                outline: none;
+                box-shadow: 0px 0px 0px 0px;
+            }
+        }
+
+        .changePropertyManager {
+            background-color: white;
+            margin-top: 2rem;
+        }
+
+        @media screen and (min-width: 48rem) {
+            margin-top: $primaryNavHeightLg;
+            flex-direction: row;
+
+            input {
+            }
+
+            .changePropertyManager {
+                margin-top: 0;
+                margin-left: 8rem;
+            }
+        }
+    }
+
+    ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    li {
+        margin: 0rem;
+        padding: 3rem 0rem;
+        border-bottom: 1px solid lightgrey;
+    }
+
+    li.header {
+        color: #858585;
+        font-weight: 400;
+        font-size: 1.5rem;
+        padding: 2rem 0;
+
+        .sortLabel {
+            cursor: pointer;
+            -webkit-user-select: none; /* Safari */
+            -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* IE10+/Edge */
+            user-select: none; /* Standard */
+        }
+    }
+
+    li.row {
+
+        .col-md-2 {
+            margin-bottom: 2rem;
+        }
+
+        .col-md-2:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    .col-md-2 label.header {
+        display: block;
+        color: #858585;
+        font-weight: 400;
+        font-size: 1.2rem;
+        margin-bottom: 0;
+    }
+
+    p {
+        font-size: 1.4rem;
+        color: black;
+        line-height: 1;
+        margin: 0 0 0.8rem 0;
+        padding: 0;
+    }
+
+    p:last-child {
+        margin-bottom: 0;
+    }
+
+    .eeName {
+        color: black;
+        font-weight: 500;
+        font-size: 1.8rem;
+    }
+
+    .rmcName {
+        font-size: 1.6rem;
+        font-weight: 500;
+    }
+
+    @media screen and (min-width: 60rem) {
+
+        li {
+            margin: 0rem;
+            padding: 2rem 0rem;
+        }
+
+        li.row {
+
+            .col-md-2 {
+                margin-bottom: 0;
+            }
+        }
+
+        .col-md-2 label.header {
+            display: none;
+        }
+
+        .col-md-2 label.header.headerPersist {
+            display: block;
+        }
+    }
+}
+.progress {
+    height: 2rem;
+    margin-bottom: 0px;
+}
+
+.progressBar__sched {
+    background-color: $DW_LtBlue;
+}
+
+.progressBar__comp {
+    background-color: $DW_Green;
+}
+
+.progress-bar:last-child:before {
+    background-color: #efefef;
+}
+
+.progressBar__caption {
+    position: relative;
+    margin-top: 0.75rem;
+
+    label {
+        display: block;
+        margin-bottom: 0.75rem;
+        line-height: 1rem;
+
+        .green {
+            color: $DW_Green;
+            font-weight: 600;
+        }
+
+        .blue {
+            color: $DW_Blue;
+            font-weight: 600;
+        }
+    }
+}

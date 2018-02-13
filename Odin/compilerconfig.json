@@ -1,91 +1,42 @@
 ﻿[
   {
-    "outputFile": "Content/css/transferee/sideNav.css",
-    "inputFile": "Content/css/transferee/sideNav.scss"
+    "outputFile": "Content/styles/css/refactor/orders.css",
+    "inputFile": "Content/styles/scss/refactor/orders.scss"
   },
   {
-    "outputFile": "Content/css/primaryNav.css",
-    "inputFile": "Content/css/primaryNav.scss"
+    "outputFile": "Content/styles/css/refactor/login.css",
+    "inputFile": "Content/styles/scss/refactor/login.scss"
   },
   {
-    "outputFile": "Content/css/orders.css",
-    "inputFile": "Content/css/orders.scss"
+    "outputFile": "Content/styles/css/refactor/forgotpassword.css",
+    "inputFile": "Content/styles/scss/refactor/forgotpassword.scss"
   },
   {
-    "outputFile": "Content/css/login.css",
-    "inputFile": "Content/css/login.scss"
+    "outputFile": "Content/styles/css/refactor/help.css",
+    "inputFile": "Content/styles/scss/refactor/help.scss"
   },
   {
-    "outputFile": "Content/css/forgotpassword.css",
-    "inputFile": "Content/css/forgotpassword.scss"
+    "outputFile": "Content/styles/css/refactor/bookmarklet.css",
+    "inputFile": "Content/styles/scss/refactor/bookmarklet.scss"
   },
   {
-    "outputFile": "Content/css/transferee/transferee.css",
-    "inputFile": "Content/css/transferee/transferee.scss"
+    "outputFile": "Content/styles/css/application.css",
+    "inputFile": "Content/styles/scss/application.scss"
   },
   {
-    "outputFile": "Content/css/transferee/itinerary.css",
-    "inputFile": "Content/css/transferee/itinerary.scss"
+    "outputFile": "Content/styles/css/refactor/transferee.css",
+    "inputFile": "Content/styles/scss/refactor/transferee.scss"
   },
   {
-    "outputFile": "Content/css/transferee/details.css",
-    "inputFile": "Content/css/transferee/details.scss"
+    "outputFile": "Content/styles/css/refactor/itineraryPdf.css",
+    "inputFile": "Content/styles/scss/refactor/itineraryPdf.scss"
   },
   {
-    "outputFile": "Content/css/transferee/history.css",
-    "inputFile": "Content/css/transferee/history.scss"
+    "outputFile": "Content/styles/css/refactor/transferee/HFPropertiesPDF.css",
+    "inputFile": "Content/styles/scss/refactor/transferee/HFPropertiesPDF.scss"
   },
   {
-    "outputFile": "Content/css/transferee/intake.css",
-    "inputFile": "Content/css/transferee/intake.scss"
-  },
-  {
-    "outputFile": "Content/css/transferee/messages.css",
-    "inputFile": "Content/css/transferee/messages.scss"
-  },
-  {
-    "outputFile": "Content/css/transferee/housing.css",
-    "inputFile": "Content/css/transferee/housing.scss"
-  },
-  {
-    "outputFile": "Content/css/header.css",
-    "inputFile": "Content/css/header.scss"
-  },
-  {
-    "outputFile": "Content/css/transferee/itinerary.css",
-    "inputFile": "Content/css/transferee/itinerary.scss"
-  },
-  {
-    "outputFile": "Content/css/help.css",
-    "inputFile": "Content/css/help.scss"
-  },
-  {
-    "outputFile": "Content/css/bookmarklet.css",
-    "inputFile": "Content/css/bookmarklet.scss"
-  },
-  {
-    "outputFile": "Content/css/transferee/help.css",
-    "inputFile": "Content/css/transferee/help.scss"
-  },
-  {
-    "outputFile": "Content/css/transferee/propertyMessages.css",
-    "inputFile": "Content/css/transferee/propertyMessages.scss"
-  },
-  {
-    "outputFile": "Content/css/transferee/itineraryPdf.css",
-    "inputFile": "Content/css/transferee/itineraryPdf.scss"
-  },
-  {
-    "outputFile": "Content/css/transferee/dashboard.css",
-    "inputFile": "Content/css/transferee/dashboard.scss"
-  },
-  {
-
-    "outputFile": "Content/css/transferee/HFPropertiesPDF.css",
-    "inputFile": "Content/css/transferee/HFPropertiesPDF.scss"
-  },
-  {
-    "outputFile": "Content/css/selectedProperty.css",
-    "inputFile": "Content/css/selectedProperty.scss"
+    "outputFile": "Content/styles/css/refactor/transferee/selectedProperty.css",
+    "inputFile": "Content/styles/scss/refactor/transferee/selectedProperty.scss"
   }
 ]

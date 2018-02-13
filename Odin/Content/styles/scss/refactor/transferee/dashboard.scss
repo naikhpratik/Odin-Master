@@ -1,0 +1,155 @@
+﻿.dashboardWrap {
+    padding: 5rem 3rem 5rem 4rem;
+}
+
+.dashboardCard {
+    box-shadow: 0px 3px 8px rgba(0,0,0,0.35);
+}
+
+.dashboardCard__head{
+    background-color: $DW_Lime;
+    padding: 3rem 3rem 2rem 3rem;
+    color: white;
+    font-size: 2rem;
+}
+
+.dashboardSection {
+    border-bottom: 1px solid #e1e1e1;
+    padding: 3rem 1rem;
+    margin: 0 2rem;
+}
+
+.dashboardSection__head{
+    color: $DW_Blue;
+    font-weight: 500;
+}
+
+.dashboardSection__text{
+    color: #858585;
+}
+
+.dashboardProgressBar{
+    height: 2rem;
+    width: 100%;
+    background-color: #e1e1e1;
+}
+
+.dashboardProgressBar__progress{
+    height: 2rem;
+    width: 50%;
+    background-color: $DW_LtPurple;
+}
+
+.dashboardTaskList {
+    list-style: none;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0; 
+    display: flex;
+    flex-direction: column;
+
+    @media screen and (min-width: 86.2rem){
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+}
+
+.dashboardTaskList__task {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding-bottom: 1rem;
+
+    @media screen and (min-width: 86.2rem) {
+        width: 50%;
+
+        &:nth-child(odd) {
+            padding-right: 1rem;
+            border-right: 1px solid #e1e1e1;
+        }
+
+        &:nth-child(even) {
+            padding-left: 1rem;
+        }
+    }
+}
+
+
+
+.dashboardTaskList__check{
+    margin-right: 1rem;
+    flex-basis: auto;
+}
+
+.dashboardTaskList__taskText{
+    margin-bottom: 0;
+    line-height: 1.75rem;
+}
+
+.dashboardItinerary__day {
+    border-bottom: 1px solid #e1e1e1;
+    padding: 2rem 0;
+    line-height: 1.5rem;
+
+    p {
+        margin: 0 0;
+    }
+}
+
+
+
+.dashboardItinerary__date {
+    display: flex;
+
+    margin-bottom: 2rem;
+    align-items: center;
+}
+
+.dashboardItinerary__dateDayNumber {
+    width: 7rem;
+    display: block;
+    font-size: 4rem;
+    font-weight: 600;
+    line-height: 4rem;
+    color: $DW_Blue;
+    margin-bottom:0;
+    text-align: justify;
+}
+
+.dashboardItinerary__dateDayNameMonthYear {
+    width: calc(100% - 7rem);
+    margin-left: 1rem;
+    line-height: 2rem;
+    color: #111111;
+
+    p {
+        color: #818181;
+        margin: 0 0;
+        font-size: 1.5rem;
+
+        span {
+            font-size: 1.375rem;
+            font-weight: 600;
+        }
+    }
+}
+
+
+
+.dashboardItinerary__task {
+    display: flex;
+}
+
+.dashboardItinerary__taskTime {
+    color: $DW_Lime;
+    font-size: 1.375rem;
+    font-weight: 600;
+    width: 7rem;
+    display: block;
+}
+
+.dashboardItinerary__taskNote {
+    width: calc(100% - 7rem);
+    margin-left: 1rem;
+    line-height: 2rem;
+    color: #111111;
+}

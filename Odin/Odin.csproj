@@ -19,7 +19,7 @@
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
-    <IISExpressSSLPort>44394</IISExpressSSLPort>
+    <IISExpressSSLPort>44312</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -420,121 +420,6 @@
     <Compile Include="Views\Helpers\UrlHelpers.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\animate.css" />
-    <Content Include="Content\bootstrap-datetimepicker.css" />
-    <Content Include="Content\bootstrap-datetimepicker.min.css">
-      <DependentUpon>bootstrap-datetimepicker.css</DependentUpon>
-    </Content>
-    <Content Include="Content\bootstrap-flatly.css" />
-    <Content Include="Content\bootstrap-paper.css" />
-    <Content Include="Content\bootstrap-theme.css" />
-    <Content Include="Content\bootstrap-theme.min.css" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\css\bookmarklet.css">
-      <DependentUpon>bookmarklet.scss</DependentUpon>
-    </Content>
-    <Content Include="Content\css\bookmarklet.min.css">
-      <DependentUpon>bookmarklet.css</DependentUpon>
-    </Content>
-    <Content Include="Content\css\header.css">
-      <DependentUpon>header.scss</DependentUpon>
-    </Content>
-    <Content Include="Content\css\header.min.css">
-      <DependentUpon>header.css</DependentUpon>
-    </Content>
-    <Content Include="Content\css\help.css">
-      <DependentUpon>help.scss</DependentUpon>
-    </Content>
-    <Content Include="Content\css\help.min.css">
-      <DependentUpon>help.css</DependentUpon>
-    </Content>
-    <Content Include="Content\css\selectedProperty.css">
-      <DependentUpon>selectedProperty.scss</DependentUpon>
-    </Content>
-    <Content Include="Content\css\selectedProperty.min.css">
-      <DependentUpon>selectedProperty.css</DependentUpon>
-    </Content>
-    <Content Include="Content\css\shared\dw_loading.css" />
-    <Content Include="Content\css\shared\thumbnails.carousel.css" />
-    <Content Include="Content\css\transferee\dashboard.css">
-      <DependentUpon>dashboard.scss</DependentUpon>
-    </Content>
-    <Content Include="Content\css\transferee\dashboard.min.css">
-      <DependentUpon>dashboard.css</DependentUpon>
-    </Content>
-    <Content Include="Content\css\transferee\details.css">
-      <DependentUpon>details.scss</DependentUpon>
-    </Content>
-    <Content Include="Content\css\transferee\details.min.css">
-      <DependentUpon>details.css</DependentUpon>
-    </Content>
-    <Content Include="Content\css\transferee\help.css">
-      <DependentUpon>help.scss</DependentUpon>
-    </Content>
-    <Content Include="Content\css\transferee\help.min.css">
-      <DependentUpon>help.css</DependentUpon>
-    </Content>
-    <Content Include="Content\css\transferee\HFPropertiesPDF.css">
-      <DependentUpon>HFPropertiesPDF.scss</DependentUpon>
-    </Content>
-    <Content Include="Content\css\transferee\HFPropertiesPDF.min.css">
-      <DependentUpon>HFPropertiesPDF.css</DependentUpon>
-    </Content>
-    <Content Include="Content\css\transferee\history.css">
-      <DependentUpon>history.scss</DependentUpon>
-    </Content>
-    <Content Include="Content\css\transferee\history.min.css">
-      <DependentUpon>history.css</DependentUpon>
-    </Content>
-    <Content Include="Content\css\transferee\housing.css">
-      <DependentUpon>housing.scss</DependentUpon>
-    </Content>
-    <Content Include="Content\css\transferee\housing.min.css">
-      <DependentUpon>housing.css</DependentUpon>
-    </Content>
-    <Content Include="Content\css\transferee\intake.css">
-      <DependentUpon>intake.scss</DependentUpon>
-    </Content>
-    <Content Include="Content\css\transferee\intake.min.css">
-      <DependentUpon>intake.css</DependentUpon>
-    </Content>
-    <Content Include="Content\css\transferee\itinerary.css">
-      <DependentUpon>itinerary.scss</DependentUpon>
-    </Content>
-    <Content Include="Content\css\transferee\itinerary.min.css">
-      <DependentUpon>itinerary.css</DependentUpon>
-    </Content>
-    <Content Include="Content\css\transferee\itineraryPdf.css">
-      <DependentUpon>itineraryPdf.scss</DependentUpon>
-    </Content>
-    <Content Include="Content\css\transferee\itineraryPdf.min.css">
-      <DependentUpon>itineraryPdf.css</DependentUpon>
-    </Content>
-    <Content Include="Content\css\transferee\messages.css">
-      <DependentUpon>messages.scss</DependentUpon>
-    </Content>
-    <Content Include="Content\css\transferee\messages.min.css">
-      <DependentUpon>messages.css</DependentUpon>
-    </Content>
-    <Content Include="Content\css\transferee\propertyMessages.css">
-      <DependentUpon>propertyMessages.scss</DependentUpon>
-    </Content>
-    <Content Include="Content\css\transferee\propertyMessages.min.css">
-      <DependentUpon>propertyMessages.css</DependentUpon>
-    </Content>
-    <Content Include="Content\css\transferee\sideNav.css">
-      <DependentUpon>sideNav.scss</DependentUpon>
-    </Content>
-    <Content Include="Content\css\transferee\sideNav.min.css">
-      <DependentUpon>sideNav.css</DependentUpon>
-    </Content>
-    <Content Include="Content\css\transferee\transferee.css">
-      <DependentUpon>transferee.scss</DependentUpon>
-    </Content>
-    <Content Include="Content\css\transferee\transferee.min.css">
-      <DependentUpon>transferee.css</DependentUpon>
-    </Content>
     <Content Include="Content\DataTables\css\autoFill.bootstrap.css" />
     <Content Include="Content\DataTables\css\autoFill.bootstrap.min.css" />
     <Content Include="Content\DataTables\css\autoFill.bootstrap4.css" />
@@ -692,12 +577,7 @@
     <Content Include="Content\DataTables\images\sort_desc.png" />
     <Content Include="Content\DataTables\images\sort_desc_disabled.png" />
     <Content Include="Content\DataTables\swf\flashExport.swf" />
-    <Content Include="Content\css\forgotpassword.css">
-      <DependentUpon>forgotpassword.scss</DependentUpon>
-    </Content>
-    <Content Include="Content\css\forgotpassword.min.css">
-      <DependentUpon>forgotpassword.css</DependentUpon>
-    </Content>
+    <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\Images\bg_gradient_forgot_password.png" />
     <Content Include="Content\Images\bg_img_3.png" />
     <Content Include="Content\Images\bg_img_w_gradient.png" />
@@ -763,25 +643,34 @@
     <Content Include="Content\Images\task_done.png" />
     <Content Include="Content\Images\task_notDone.png" />
     <Content Include="Content\Images\user-placeholder.png" />
-    <Content Include="Content\css\login.css">
-      <DependentUpon>login.scss</DependentUpon>
+    <None Include="Content\styles\scss\0_libs\animate.scss" />
+    <Content Include="Content\styles\css\application.css" />
+    <Content Include="Content\styles\css\application.min.css" />
+    <None Include="Content\styles\scss\0_libs\bootstrap-datetimepicker.scss" />
+    <None Include="Content\styles\scss\0_libs\bootstrap-paper.scss" />
+    <Content Include="Content\styles\css\refactor\bookmarklet.css" />
+    <Content Include="Content\styles\css\refactor\bookmarklet.min.css" />
+    <Content Include="Content\styles\css\refactor\forgotpassword.css" />
+    <Content Include="Content\styles\css\refactor\forgotpassword.min.css" />
+    <Content Include="Content\styles\css\refactor\help.css" />
+    <Content Include="Content\styles\css\refactor\help.min.css" />
+    <Content Include="Content\styles\css\refactor\itineraryPdf.css" />
+    <Content Include="Content\styles\css\refactor\itineraryPdf.min.css" />
+    <Content Include="Content\styles\css\refactor\login.css" />
+    <Content Include="Content\styles\css\refactor\login.min.css" />
+    <Content Include="Content\styles\css\refactor\orders.css" />
+    <Content Include="Content\styles\css\refactor\orders.min.css" />
+    <Content Include="Content\styles\css\refactor\selectedProperty.css" />
+    <Content Include="Content\styles\css\refactor\selectedProperty.min.css" />
+    <Content Include="Content\styles\css\refactor\transferee.css" />
+    <Content Include="Content\styles\css\refactor\transferee.min.css" />
+    <Content Include="Content\styles\css\refactor\transferee\HFPropertiesPDF.css" />
+    <Content Include="Content\styles\css\refactor\transferee\HFPropertiesPDF.min.css" />
+    <None Include="Content\styles\scss\0_libs\typeahead.scss" />
+    <Content Include="Content\styles\css\refactor\transferee\selectedProperty.css" />
+    <Content Include="Content\styles\css\refactor\transferee\selectedProperty.min.css">
+      <DependentUpon>selectedProperty.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\login.min.css">
-      <DependentUpon>login.css</DependentUpon>
-    </Content>
-    <Content Include="Content\css\orders.css">
-      <DependentUpon>orders.scss</DependentUpon>
-    </Content>
-    <Content Include="Content\css\orders.min.css">
-      <DependentUpon>orders.css</DependentUpon>
-    </Content>
-    <Content Include="Content\css\primaryNav.css">
-      <DependentUpon>primaryNav.scss</DependentUpon>
-    </Content>
-    <Content Include="Content\css\primaryNav.min.css">
-      <DependentUpon>primaryNav.css</DependentUpon>
-    </Content>
-    <Content Include="Content\leaflet.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -823,13 +712,10 @@
     <Content Include="Content\themes\base\tabs.css" />
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
-    <Content Include="Content\typeahead.css" />
     <Content Include="Errors\404.html" />
     <Content Include="Errors\error.html" />
     <Content Include="favicon.ico" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
     <Content Include="Rotativa\help-wkhtmltoimage.txt" />
     <Content Include="Rotativa\help-wkhtmltopdf.txt" />
     <Content Include="Rotativa\wkhtmltoimage.exe" />
@@ -875,33 +761,37 @@
     <None Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>
     </None>
-    <Content Include="Content\css\login.scss" />
-    <Content Include="Content\css\orders.scss" />
-    <Content Include="Content\css\forgotpassword.scss" />
-    <Content Include="Content\css\shared\_definitions.scss" />
-    <Content Include="Content\css\transferee\intake.scss" />
-    <Content Include="Content\css\transferee\itinerary.scss" />
-    <Content Include="Content\css\transferee\details.scss" />
-    <Content Include="Content\css\transferee\housing.scss" />
-    <Content Include="Content\css\transferee\history.scss" />
-    <Content Include="Content\css\transferee\messages.scss" />
-    <Content Include="Content\css\transferee\transferee.scss" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap-theme.css.map" />
-    <Content Include="Content\css\primaryNav.scss" />
-    <Content Include="Content\css\header.scss" />
-    <Content Include="Content\css\transferee\sideNav.scss" />
-    <Content Include="Content\css\bookmarklet.scss" />
-    <Content Include="Content\css\help.scss" />
-    <TypeScriptCompile Include="Content\css\transferee\HFPropertiesPDF.scss" />
-    <Content Include="Content\css\transferee\help.scss" />
-    <Content Include="Content\css\transferee\propertyMessages.scss" />
-    <Content Include="Content\css\transferee\itineraryPdf.scss" />
-    <Content Include="Content\css\transferee\dashboard.scss" />
-    <Content Include="Content\css\selectedProperty.scss" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\styles\scss\2_resets\reset.scss" />
+    <Content Include="Content\styles\scss\3_elements\body.scss" />
+    <Content Include="Content\styles\scss\4_components\carousel.scss" />
+    <Content Include="Content\styles\scss\4_components\datetimepicker.scss" />
+    <Content Include="Content\styles\scss\4_components\loadingAnimation.scss" />
+    <Content Include="Content\styles\scss\4_components\primaryNav.scss" />
+    <Content Include="Content\styles\scss\application.scss" />
+    <Content Include="Content\styles\scss\refactor\bookmarklet.scss" />
+    <Content Include="Content\styles\scss\refactor\definitions.scss" />
+    <Content Include="Content\styles\scss\refactor\forgotpassword.scss" />
+    <Content Include="Content\styles\scss\refactor\help.scss" />
+    <Content Include="Content\styles\scss\refactor\itineraryPdf.scss" />
+    <Content Include="Content\styles\scss\refactor\login.scss" />
+    <Content Include="Content\styles\scss\refactor\orders.scss" />
+    <Content Include="Content\styles\scss\refactor\transferee\selectedProperty.scss" />
+    <Content Include="Content\styles\scss\refactor\transferee.scss" />
+    <Content Include="Content\styles\scss\refactor\transferee\dashboard.scss" />
+    <Content Include="Content\styles\scss\refactor\transferee\details.scss" />
+    <Content Include="Content\styles\scss\refactor\transferee\help.scss" />
+    <Content Include="Content\styles\scss\refactor\transferee\HFPropertiesPDF.scss" />
+    <Content Include="Content\styles\scss\refactor\transferee\history.scss" />
+    <Content Include="Content\styles\scss\refactor\transferee\housing.scss" />
+    <Content Include="Content\styles\scss\refactor\transferee\intake.scss" />
+    <Content Include="Content\styles\scss\refactor\transferee\itinerary.scss" />
+    <Content Include="Content\styles\scss\refactor\transferee\messages.scss" />
+    <Content Include="Content\styles\scss\refactor\transferee\propertyMessages.scss" />
+    <Content Include="Content\styles\scss\refactor\transferee\sideNav.scss" />
+    <Content Include="Content\styles\scss\refactor\transferee\transferee.scss" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.min.js" />
@@ -1093,6 +983,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\styles\scss\1_settings\" />
     <Folder Include="Views\Appointment\" />
     <Folder Include="Views\Email\" />
     <Folder Include="Views\Message\" />

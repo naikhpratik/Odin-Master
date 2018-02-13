@@ -36,6 +36,7 @@ namespace Odin.ToSeWebJob
 
         public async Task ProcessQueueMessage([QueueTrigger("odintose")] string message, int dequeueCount, TextWriter log)
         {
+            log.WriteLine("Deploy 1");
             log.WriteLine(message);
             if (dequeueCount >= MaxQueueCount)
             {

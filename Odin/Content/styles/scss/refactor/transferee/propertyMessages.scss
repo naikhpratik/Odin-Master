@@ -1,0 +1,74 @@
+﻿#messageBody {
+    padding: 0 7%;
+}
+
+//Temp refactor
+#modalNotification {
+    .modal-title {
+        float: right;
+        color: white;
+    }
+
+    .modal-content{
+        padding: 0;
+    }
+
+    textarea{
+        width:100%;
+    }
+}
+
+.messageImage {
+    margin-top: 1rem;    
+}
+.messageListNotRead {
+    padding-left: 1rem;
+    background-color: lightgray;    
+    .messageHeader {
+        margin-bottom: 0px;
+        font-weight: 500;
+        background-color: lightgray;
+
+        span {
+            font-weight: 400;
+            color: rgb(128, 128, 128);
+            margin-left: 1rem;
+            background-color: lightgray;
+        }    
+    }
+}
+.messageList {
+    padding-left: 1rem;    
+    .messageHeader {
+        margin-bottom: 0px;
+        font-weight: 500;
+
+        span {
+            font-weight: 400;
+            color: rgb(128, 128, 128);
+            margin-left: 1rem;
+        }
+    }
+}
+textarea#message {
+    height: 120px;
+    border: 1px solid #cccccc;
+    padding: 5px;
+    font-family: Tahoma, sans-serif;
+    background-repeat: no-repeat;
+}
+
+.modal-footer {
+    padding: 2rem 0;
+    clear: both;
+    overflow: auto;
+    zoom: 1;
+
+    .btn-primary {
+        float: right;
+    }
+
+    .btn-secondary {
+        float: left;
+    }
+}
