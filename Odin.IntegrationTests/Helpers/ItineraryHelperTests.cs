@@ -1,14 +1,15 @@
 ﻿using AutoMapper;
-using Odin.Data.Persistence;
-using Odin.Helpers;
 using FluentAssertions;
 using NUnit.Framework;
-using Odin.Data.Core.Models;
 using Odin.Data.Builders;
+using Odin.Data.Core.Models;
+using Odin.Data.Persistence;
+using Odin.Helpers;
 using Odin.IntegrationTests.TestAttributes;
 using Odin.ViewModels.Orders.Transferee;
-using System.Linq;
 using System;
+using System.Linq;
+using HomeFindingProperty = Odin.Data.Core.Models.HomeFindingProperty;
 
 namespace Odin.IntegrationTests.Helpers
 {
@@ -60,7 +61,7 @@ namespace Odin.IntegrationTests.Helpers
             Context.SaveChanges();
             Context.Entry(order).Reload();
             //assert
-            var result = _itineraryHelper.Build(order.Id);
+            var result = _itineraryHelper.Build(order);
             result.Itinerary.ToList().Count().Should().Equals(2);
         }
         [Test, Isolated]
@@ -80,7 +81,7 @@ namespace Odin.IntegrationTests.Helpers
             Context.SaveChanges();
             Context.Entry(order).Reload();
             //assert
-            var result = _itineraryHelper.Build(order.Id);
+            var result = _itineraryHelper.Build(order);
             result.Itinerary.ToList().Count().Should().Equals(0);
         }
         [Test, Isolated]
@@ -108,7 +109,7 @@ namespace Odin.IntegrationTests.Helpers
             Context.SaveChanges();
             Context.Entry(order).Reload();
             //assert
-            var result = _itineraryHelper.Build(order.Id);
+            var result = _itineraryHelper.Build(order);
             result.Itinerary.ToList().Count().Should().Equals(1);
         }
         [Test, Isolated]
@@ -134,7 +135,7 @@ namespace Odin.IntegrationTests.Helpers
             Context.SaveChanges();
             Context.Entry(order).Reload();
             //assert
-            var result = _itineraryHelper.Build(order.Id);
+            var result = _itineraryHelper.Build(order);
             result.Itinerary.ToList().Count().Should().Equals(1);
         }
         [Test, Isolated]
@@ -167,9 +168,203 @@ namespace Odin.IntegrationTests.Helpers
             Context.SaveChanges();
             Context.Entry(order).Reload();
             //assert
-            var result = _itineraryHelper.Build("999");
-            result.Itinerary.ToList().Count().Should().Equals(0);
+            var result = _itineraryHelper.Build(null);
+            result.Should().BeNull();
         }
+
+        [Test, Isolated]
+        public void Build_Order_ShouldHaveOneServiceOnIntinerary()
+        {
+            Order order = new Order()
+            {
+                Id = "1",
+                ServiceFlag = (int)ServiceCategory.AccompaniedHomeFinding
+            };
+
+            order.Services.Add(
+                new Service()
+                {
+                    ServiceType = new ServiceType() { Name = "Unscheduled" },
+                    ScheduledDate = null
+                }
+            );
+
+            order.Services.Add(
+                new Service()
+                {
+                    ServiceType = new ServiceType() { Name = "Completed" },
+                    ScheduledDate = DateTime.Now,
+                    CompletedDate = DateTime.Now
+                }
+            );
+
+            order.Services.Add(
+                new Service()
+                {
+                    ServiceType = new ServiceType() { Name = "Scheduled" },
+                    ScheduledDate = DateTime.Now.AddDays(1)
+                }
+            );
+            
+            _itineraryHelper = new ItineraryHelper(unitOfWork,mapper);
+
+            var result = _itineraryHelper.Build(order);
+            result.Itinerary.Count().Should().Be(1);
+        }
+
+        [Test, Isolated]
+        public void Build_Order_ShouldHaveOneAppointmentOnIntinerary()
+        {
+            Order order = new Order()
+            {
+                Id = "1",
+                ServiceFlag = (int)ServiceCategory.AccompaniedHomeFinding
+            };
+
+            order.Appointments.Add(
+                new Appointment(){
+                    Description = "Deleted",
+                    ScheduledDate = DateTime.Now.AddDays(1),
+                    Deleted = true
+                }
+            );
+
+            order.Appointments.Add(
+                new Appointment()
+                {
+                    Description = "Past",
+                    ScheduledDate = DateTime.Now.AddDays(-1)
+                }
+            );
+
+            order.Appointments.Add(
+                new Appointment()
+                {
+                    Description = "Scheduled",
+                    ScheduledDate = DateTime.Now.AddDays(1)
+                }
+            );
+
+            _itineraryHelper = new ItineraryHelper(unitOfWork, mapper);
+
+            var result = _itineraryHelper.Build(order);
+            result.Itinerary.Count().Should().Be(1);
+        }
+
+        [Test, Isolated]
+        public void Build_HomeFindingOrder_ShouldHaveOneViewingOnIntinerary()
+        {
+            Order order = new Order()
+            {
+                Id = "1",
+                ServiceFlag = (int)ServiceCategory.AccompaniedHomeFinding,
+                HomeFinding = new HomeFinding()
+            };
+
+            order.HomeFinding.HomeFindingProperties.Add(
+                new HomeFindingProperty()
+                {
+                    ViewingDate = DateTime.Now.AddDays(1),
+                    Deleted = true
+                }
+            );
+
+            order.HomeFinding.HomeFindingProperties.Add(
+                new HomeFindingProperty()
+                {
+                    ViewingDate = null
+                }
+            );
+
+            order.HomeFinding.HomeFindingProperties.Add(
+                new HomeFindingProperty()
+                {
+                    ViewingDate = DateTime.Now.AddDays(1)
+                }
+            );
+
+            _itineraryHelper = new ItineraryHelper(unitOfWork, mapper);
+
+            var result = _itineraryHelper.Build(order);
+            result.Itinerary.Count().Should().Be(1);
+        }
+
+        [Test, Isolated]
+        public void Build_NotHomeFindingOrder_ShouldHaveNoViewingsOnIntinerary()
+        {
+            Order order = new Order()
+            {
+                Id = "1",
+                HomeFinding = new HomeFinding()
+            };
+
+            order.HomeFinding.HomeFindingProperties.Add(
+                new HomeFindingProperty()
+                {
+                    ViewingDate = DateTime.Now.AddDays(1),
+                    Deleted = true
+                }
+            );
+
+            order.HomeFinding.HomeFindingProperties.Add(
+                new HomeFindingProperty()
+                {
+                    ViewingDate = null
+                }
+            );
+
+            order.HomeFinding.HomeFindingProperties.Add(
+                new HomeFindingProperty()
+                {
+                    ViewingDate = DateTime.Now.AddDays(1)
+                }
+            );
+
+            _itineraryHelper = new ItineraryHelper(unitOfWork, mapper);
+
+            var result = _itineraryHelper.Build(order);
+            result.Itinerary.Count().Should().Be(0);
+        }
+
+        [Test, Isolated]
+        public void Build_HomeFindingOrder_ShouldHaveViewingServiceAppointmentOnIntinerary()
+        {
+            Order order = new Order()
+            {
+                Id = "1",
+                HomeFinding = new HomeFinding(),
+                ServiceFlag = (int)ServiceCategory.AccompaniedHomeFinding
+            };
+
+            order.HomeFinding.HomeFindingProperties.Add(
+                new HomeFindingProperty()
+                {
+                    ViewingDate = DateTime.Now.AddDays(1)
+                }
+            );
+
+            order.Appointments.Add(
+                new Appointment()
+                {
+                    Description = "Scheduled",
+                    ScheduledDate = DateTime.Now.AddDays(1)
+                }
+            );
+
+            order.Services.Add(
+                new Service()
+                {
+                    ServiceType = new ServiceType() { Name = "Scheduled" },
+                    ScheduledDate = DateTime.Now.AddDays(1)
+                }
+            );
+
+            _itineraryHelper = new ItineraryHelper(unitOfWork, mapper);
+
+            var result = _itineraryHelper.Build(order);
+            result.Itinerary.Count().Should().Be(3);
+        }
+
         private Order setUpOrder()
         {
             var order = OrderBuilder.New().First();

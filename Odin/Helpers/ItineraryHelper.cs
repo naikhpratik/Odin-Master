@@ -3,6 +3,7 @@ using Odin.Data.Core;
 using Odin.Data.Core.Models;
 using Odin.ViewModels.Orders.Transferee;
 using Odin.ViewModels.Shared;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -18,22 +19,40 @@ namespace Odin.Helpers
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
-        public OrdersTransfereeItineraryViewModel Build(string id)
+
+        public OrdersTransfereeItineraryViewModel Build(Order order)
         {
-            var itinerary = GetItinerary(id);
+            if (order == null)
+            {
+                return null;
+            }
+
+            var itinerary = GetItinerary(order);
             OrdersTransfereeItineraryViewModel vm = new OrdersTransfereeItineraryViewModel();
             vm.Itinerary = itinerary;
             return vm;
         }
 
-        public IEnumerable<ItineraryEntryViewModel> GetItinerary(string id)
+        public IEnumerable<ItineraryEntryViewModel> GetItinerary(Order order)
         {
-            var itinService = _unitOfWork.Services.GetServicesByOrderId(id);
-            var itinAppointments = _unitOfWork.Appointments.GetAppointmentsByOrderId(id);
-            // NOTE: This works because homefinding id is the same as order id
-            var itinViewings = _unitOfWork.HomeFindingProperties.GetUpcomingHomeFindingPropertiesByHomeFindingId(id);
+            var itinServices =
+                order.Services.Where(s => s.CompletedDate.HasValue == false && s.ScheduledDate >= DateTime.Now);
 
-            var itinerary1 = _mapper.Map<IEnumerable<Service>, IEnumerable<ItineraryEntryViewModel>>(itinService);
+            var itinAppointments = order.Appointments.Where(a => a.Deleted == false && a.ScheduledDate >= DateTime.Now);
+
+            IEnumerable<HomeFindingProperty> itinViewings; 
+            if (order.HasHomeFinding)
+            {
+                itinViewings =
+                    order.HomeFinding.HomeFindingProperties.Where(hfp =>
+                        hfp.Deleted == false && hfp.ViewingDate >= DateTime.Now);
+            }
+            else
+            {
+                itinViewings = new List<HomeFindingProperty>();
+            }
+            
+            var itinerary1 = _mapper.Map<IEnumerable<Service>, IEnumerable<ItineraryEntryViewModel>>(itinServices);
             var itinerary2 = _mapper.Map<IEnumerable<Appointment>, IEnumerable<ItineraryEntryViewModel>>(itinAppointments);
             var itinerary3 = _mapper.Map<IEnumerable<HomeFindingProperty>, IEnumerable<ItineraryEntryViewModel>>(itinViewings);
 

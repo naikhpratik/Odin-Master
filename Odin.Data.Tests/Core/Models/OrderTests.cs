@@ -15,6 +15,7 @@ namespace Odin.Data.Tests.Core.Models
             var order = new Order();
             order.HomeFinding = new HomeFinding();
             order.HomeFinding.HomeFindingProperties.Add(new HomeFindingProperty());
+            order.ServiceFlag = (int) ServiceCategory.AccompaniedHomeFinding;
 
             order.HomeFindingServices.Where(hfs => hfs.CompletedDate.HasValue).Count().Should().Be(1);
         }
@@ -25,6 +26,7 @@ namespace Odin.Data.Tests.Core.Models
             var order = new Order();
             order.HomeFinding = new HomeFinding();
             order.HomeFinding.HomeFindingProperties.Add(new HomeFindingProperty(){ViewingDate = DateTime.Now});
+            order.ServiceFlag = (int)ServiceCategory.AccompaniedHomeFinding;
 
             order.HomeFindingServices.Where(hfs => hfs.CompletedDate.HasValue).Count().Should().Be(2);
         }
@@ -35,8 +37,19 @@ namespace Odin.Data.Tests.Core.Models
             var order = new Order();
             order.HomeFinding = new HomeFinding();
             order.HomeFinding.HomeFindingProperties.Add(new HomeFindingProperty() { selected = true});
+            order.ServiceFlag = (int)ServiceCategory.AccompaniedHomeFinding;
 
             order.HomeFindingServices.Where(hfs => hfs.CompletedDate.HasValue).Count().Should().Be(3);
+        }
+
+        [TestMethod]
+        public void HomeFindingServices_HasHomeFindingPropertyButNoHomefindingService_ShouldHaveNoHomeFindingServices()
+        {
+            var order = new Order();
+            order.HomeFinding = new HomeFinding();
+            order.HomeFinding.HomeFindingProperties.Add(new HomeFindingProperty());
+
+            order.HomeFindingServices.Where(hfs => hfs.CompletedDate.HasValue).Count().Should().Be(0);
         }
     }
 }

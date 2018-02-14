@@ -22,6 +22,7 @@ namespace Odin.Data.Persistence
                 .Where(hfp => hfp.Id.Equals(homeFindingPropertyId))
                 .Include(hfp => hfp.Property.Photos)
                 .Include(hfp => hfp.HomeFinding)
+                .Include(hfp => hfp.HomeFinding.Order)
                 .SingleOrDefault<HomeFindingProperty>();
         }
 

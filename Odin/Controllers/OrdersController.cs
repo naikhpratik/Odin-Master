@@ -89,7 +89,7 @@ namespace Odin.Controllers
 
             var dashVM = _mapper.Map<Order, DashboardViewModel>(order);
             ItineraryHelper helper = new ItineraryHelper(_unitOfWork, _mapper);
-            dashVM.Itinerary = helper.GetItinerary(id);
+            dashVM.Itinerary = helper.GetItinerary(order);
 
             return PartialView("~/views/orders/partials/_Dashboard.cshtml", dashVM);
         }
@@ -115,8 +115,12 @@ namespace Odin.Controllers
         public ActionResult HousingPartial(string id)
         {
             var userId = User.Identity.GetUserId();
-
             Order order = _unitOfWork.Orders.GetOrderFor(userId, id, User.GetUserRole());
+
+            if (!order.HasHomeFinding)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.NotFound);
+            }
 
             ViewBag.CurrentUser = userId;
             ViewBag.IsConsultant = User.IsInRole(UserRoles.Consultant);           
@@ -215,12 +219,18 @@ namespace Odin.Controllers
         [RoleAuthorize(UserRoles.ProgramManager, UserRoles.Consultant, UserRoles.Transferee)]
         public ActionResult ItineraryPartial(string id)
         {
-            OrdersTransfereeItineraryViewModel viewModel = GetItineraryByOrderId(id);
-            viewModel.Id = id;
-            Transferee ee = GetTransfereeByOrderId(id);
-            if (ee == null)
+            var userId = User.Identity.GetUserId();
+            Order order = _unitOfWork.Orders.GetOrderFor(userId, id, User.GetUserRole());
+
+            if (order == null)
+            {
                 return new HttpStatusCodeResult(HttpStatusCode.NotFound, "Not found");
-            viewModel.TransfereeName = ee.FullName;
+            }
+
+            OrdersTransfereeItineraryViewModel viewModel = GetItineraryFromOrder(order);
+            viewModel.Id = id;
+            
+            viewModel.TransfereeName = order.Transferee.FullName;
             return PartialView("~/views/orders/partials/_Itinerary.cshtml", viewModel);
         }
 
@@ -293,19 +303,27 @@ namespace Odin.Controllers
             return _unitOfWork.Transferees.GetTransfereeByOrderId(id);
         }
 
-        private OrdersTransfereeItineraryViewModel GetItineraryByOrderId(string id)
+        private OrdersTransfereeItineraryViewModel GetItineraryFromOrder(Order order)
         {
             ItineraryHelper itinHelper = new ItineraryHelper(_unitOfWork, _mapper);
-            return itinHelper.Build(id);
+            return itinHelper.Build(order);
         }
 
+        [RoleAuthorize(UserRoles.ProgramManager, UserRoles.Consultant, UserRoles.Transferee)]
         public ActionResult GenerateItineraryPDF(string id)
         {
-            OrdersTransfereeItineraryViewModel viewModel = GetItineraryByOrderId(id);
-            viewModel.Id = id;
+            var userId = User.Identity.GetUserId();
+            Order order = _unitOfWork.Orders.GetOrderFor(userId, id, User.GetUserRole());
+            if (order == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.NotFound, "Not found");
+            }
+
+            OrdersTransfereeItineraryViewModel viewModel = GetItineraryFromOrder(order);
+            viewModel.Id = order.Id;
             viewModel.IsPdf = true;
-            Transferee ee = GetTransfereeByOrderId(id);
-            viewModel.TransfereeName = ee.FullName;
+           
+            viewModel.TransfereeName = order.Transferee.FullName;
             return new Rotativa.ViewAsPdf("~/Views/PDF/PDFItinerary.cshtml", viewModel)
             {
                 FileName = "Itinerary.pdf",

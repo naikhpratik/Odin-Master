@@ -98,7 +98,7 @@ namespace Odin.IntegrationTests.Controllers.Api
         }
 
         [Test, CleanData]
-        public async Task UpsertOrder_ValidInsertRequest_CreatesOrderRecord()
+        public async Task UpsertOrder_ValidInsertRequest_CreatesOrderRecordWithHomefinding()
         {
             // Arrange
             var orderDto = OrderDtoBuilder.New();
@@ -108,6 +108,7 @@ namespace Odin.IntegrationTests.Controllers.Api
             orderDto.Transferee.Email = "integration@test.com";
             orderDto.Consultant = ConsultantDtoBuilder.New();
             orderDto.Consultant.SeContactUid = dsc.SeContactUid.Value;
+            orderDto.ServiceFlag = (int) ServiceCategory.AccompaniedHomeFinding;
 
             // Act                
             var request = CreateRequest("api/orders", "application/json", HttpMethod.Post, orderDto);
@@ -125,6 +126,36 @@ namespace Odin.IntegrationTests.Controllers.Api
 
             order.Should().NotBeNull();
             order?.HomeFinding.Should().NotBeNull();
+        }
+
+        [Test, CleanData]
+        public async Task UpsertOrder_ValidInsertRequest_CreatesOrderRecordWithOutHomefinding()
+        {
+            // Arrange
+            var orderDto = OrderDtoBuilder.New();
+            orderDto.ProgramManager = ProgramManagerDtoBuilder.New();
+            orderDto.ProgramManager.SeContactUid = pm.SeContactUid.Value;
+            orderDto.Transferee = TransfereeDtoBuilder.New();
+            orderDto.Transferee.Email = "integration@test.com";
+            orderDto.Consultant = ConsultantDtoBuilder.New();
+            orderDto.Consultant.SeContactUid = dsc.SeContactUid.Value;
+            
+            // Act                
+            var request = CreateRequest("api/orders", "application/json", HttpMethod.Post, orderDto);
+            request.Headers.Add("Token", ApiKey);
+            var response = await Server.HttpClient.SendAsync(request);
+            var errorResponse = await response.ReadContentAsyncSafe<ErrorResponse>();
+
+            // Assert
+            errorResponse?.errors.Should().BeNull();
+            response.StatusCode.Should().Be(HttpStatusCode.OK);
+            var order = Context.Orders
+                .Where(o => o.TrackingId.Equals(orderDto.TrackingId))
+                .Include(o => o.HomeFinding)
+                .FirstOrDefault();
+
+            order.Should().NotBeNull();
+            order?.HomeFinding.Should().BeNull();
         }
 
         [Test, CleanData]

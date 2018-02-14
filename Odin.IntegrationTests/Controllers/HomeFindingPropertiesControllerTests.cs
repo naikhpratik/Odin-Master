@@ -548,6 +548,7 @@ namespace Odin.IntegrationTests.Controllers
             order.Transferee = transferee;
             order.ProgramManager = pm;
             order.Consultant = dsc;
+            order.ServiceFlag = (int) ServiceCategory.AccompaniedHomeFinding; //Has homefinding service.
 
             HomeFinding homeFinding = HomeFindingBuilder.New();
 

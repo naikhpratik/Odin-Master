@@ -1,16 +1,16 @@
-﻿using System.Web.Mvc;
-using Odin.Interfaces;
-using System.Net;
-using AutoMapper;
-using System.Collections.Generic;    
-using System.Net.Mail;
-using Odin.ViewModels.Mailers;
-using Odin.Helpers;
+﻿using AutoMapper;
+using Microsoft.AspNet.Identity;
 using Odin.Data.Core;
 using Odin.Data.Core.Models;
+using Odin.Extensions;
+using Odin.Helpers;
+using Odin.ViewModels.Mailers;
 using Odin.ViewModels.Orders.Transferee;
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Net;
+using System.Web.Mvc;
 
 namespace Odin.Controllers
 {
@@ -25,6 +25,7 @@ namespace Odin.Controllers
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
+
         [HttpGet]
         public ActionResult EmailForm(string id)
         {
@@ -40,21 +41,29 @@ namespace Odin.Controllers
             viewModel.Message = "Please find attached your itinerary for the upcoming move";
             return PartialView("~/views/Mailers/Partials/Email.cshtml", viewModel);
         }
+
         [HttpPost]
         public ActionResult SendEmail(EmailViewModel vm)
         {
             try
             {
-                OrdersTransfereeItineraryViewModel viewModel = BuildItineraryByOrderId(vm.id);
-                viewModel.Id = vm.id;
-                viewModel.IsPdf = true;
                 var to = ParseAddress(vm.Email);
                 if (to == null)
-                    return null;
-                Transferee ee = GetTransfereeByOrderId(vm.id);
-                if (ee == null)
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Missing 'to' field!");
+
+                var userId = User.Identity.GetUserId();
+                var order = _unitOfWork.Orders.GetOrderFor(userId, vm.id, User.GetUserRole());
+
+                if (order == null || order.Transferee == null) 
+                {
                     return new HttpStatusCodeResult(HttpStatusCode.NotFound, "Not found");
-                viewModel.TransfereeName = ee.FullName;
+                }
+
+                OrdersTransfereeItineraryViewModel viewModel = BuildItineraryFromOrder(order);
+                viewModel.Id = vm.id;
+                viewModel.IsPdf = true;
+                
+                viewModel.TransfereeName = order.Transferee.FullName;
                 string filename = "Itinerary" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".pdf";
                 var pdf = new Rotativa.ViewAsPdf("~/Views/PDF/PDFItinerary.cshtml", viewModel);
                 byte[] pdfBytes = pdf.BuildFile(ControllerContext);
@@ -62,7 +71,7 @@ namespace Odin.Controllers
                 EmailHelper EH = new EmailHelper();                    
                 EH.SendEmail_FS(to, vm.Subject, vm.Message, SendGrid.MimeType.Html, filename, pdfBytes);
                 viewModel.IsPdf = false;
-                return PartialView("~/views/orders/partials/_Itinerary.cshtml", viewModel);
+                return PartialView("~/views/PDF/PDFItinerary.cshtml", viewModel);
             }
             catch (Exception ex)
             {
@@ -70,15 +79,17 @@ namespace Odin.Controllers
                 return null;
             }
         }
-        public Transferee GetTransfereeByOrderId(string id)
+        private Transferee GetTransfereeByOrderId(string id)
         {
             return _unitOfWork.Transferees.GetTransfereeByOrderId(id);
         }
-        private OrdersTransfereeItineraryViewModel BuildItineraryByOrderId(string id)
+
+        private OrdersTransfereeItineraryViewModel BuildItineraryFromOrder(Order order)
         {
             ItineraryHelper itinHelper = new ItineraryHelper(_unitOfWork, _mapper);
-            return itinHelper.Build(id);            
+            return itinHelper.Build(order);            
         }
+
         private static IEnumerable<string> ParseAddress(string addresses)
         {
             if (string.IsNullOrEmpty(addresses) == true)
@@ -93,6 +104,7 @@ namespace Odin.Controllers
             }
             return newAdds;
         }
+
         public ActionResult Error()
         {
             return View();

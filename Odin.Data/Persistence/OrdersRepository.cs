@@ -121,7 +121,8 @@ namespace Odin.Data.Persistence
                 .Include(o => o.HomeFinding.HomeFindingProperties.Select(hfp => hfp.Property.Photos))
                 .Include(o => o.DepositType)
                 .Include(o => o.BrokerFeeType)
-                .Include(o => o.Notifications);
+                .Include(o => o.Notifications)
+                .Include(o => o.Appointments);
         }
 
         private IQueryable<Order> GetOrdersQueryable()

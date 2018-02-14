@@ -31,13 +31,17 @@ namespace Odin.Controllers
         {
             var userId = User.Identity.GetUserId();
 
+            Order order = _unitOfWork.Orders.GetOrderFor(userId, propertyVM.OrderId, User.GetUserRole());
+            if (order == null || !order.HasHomeFinding)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.NotFound);
+            }
+
             HomeFindingProperty homeFindingProperty = new HomeFindingProperty();
             // mapping wipes out the Id - this is hack to resolve that
             propertyVM.Id = homeFindingProperty.Id;
             propertyVM.CurrUser = User;
             _mapper.Map<HousingPropertyViewModel, HomeFindingProperty>(propertyVM, homeFindingProperty);
-
-            Order order = _unitOfWork.Orders.GetOrderFor(userId, propertyVM.OrderId, User.GetUserRole());
             
             HomeFinding homeFinding = order.HomeFinding;
             homeFinding.HomeFindingProperties.Add(homeFindingProperty);
@@ -77,6 +81,11 @@ namespace Odin.Controllers
             HomeFindingProperty homeFindingProperty;
             homeFindingProperty = _unitOfWork.HomeFindingProperties.GetHomeFindingPropertyById(propertyVM.Id);
 
+            if (homeFindingProperty == null || !homeFindingProperty.HomeFinding.Order.HasHomeFinding)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.NotFound);
+            }
+
             // !!!: Do NOT use automapper here. There are issues with mapping back from the VM and in the essence of time I couldn't find a good solution
             // AutoMapper might not be the best best tool for two way mapping
             // https://lostechies.com/jimmybogard/2009/09/18/the-case-for-two-way-mapping-in-automapper/
@@ -95,6 +104,11 @@ namespace Odin.Controllers
             HomeFindingProperty homeFindingProperty;
             homeFindingProperty = _unitOfWork.HomeFindingProperties.GetHomeFindingPropertyById(propertyVM.Id);
 
+            if (homeFindingProperty == null || !homeFindingProperty.HomeFinding.Order.HasHomeFinding)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.NotFound);
+            }
+
             // !!!: Do NOT use automapper here. There are issues with mapping back from the VM and in the essence of time I couldn't find a good solution
             // AutoMapper might not be the best best tool for two way mapping
             // https://lostechies.com/jimmybogard/2009/09/18/the-case-for-two-way-mapping-in-automapper/
@@ -110,12 +124,17 @@ namespace Odin.Controllers
         {
             HomeFindingProperty homeFindingProperty;
             homeFindingProperty = _unitOfWork.HomeFindingProperties.GetHomeFindingPropertyById(id);
-            if (homeFindingProperty != null)
-            {   if (homeFindingProperty.selected.HasValue)
-                    homeFindingProperty.selected = !homeFindingProperty.selected;
-                else
-                    homeFindingProperty.selected = true;
+
+            if (homeFindingProperty == null || !homeFindingProperty.HomeFinding.Order.HasHomeFinding)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.NotFound);
             }
+
+            if (homeFindingProperty.selected.HasValue)
+                homeFindingProperty.selected = !homeFindingProperty.selected;
+            else
+                homeFindingProperty.selected = true;
+
             _unitOfWork.Complete();
             return new HttpStatusCodeResult(HttpStatusCode.NoContent);
         }
@@ -125,15 +144,17 @@ namespace Odin.Controllers
         {
             HomeFindingProperty homeFindingProperty;
             homeFindingProperty = _unitOfWork.HomeFindingProperties.GetHomeFindingPropertyById(id);
-            if (homeFindingProperty != null)
-            {
-                if (homeFindingProperty.selected.HasValue)
-                    homeFindingProperty.selected = !homeFindingProperty.selected;
-                else
-                {
 
-                }
+            if (homeFindingProperty == null || !homeFindingProperty.HomeFinding.Order.HasHomeFinding)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.NotFound);
             }
+
+            if (homeFindingProperty.selected.HasValue)
+            {
+                homeFindingProperty.selected = !homeFindingProperty.selected;
+            }
+                
             _unitOfWork.Complete();
             return new HttpStatusCodeResult(HttpStatusCode.NoContent);
         }
@@ -145,7 +166,7 @@ namespace Odin.Controllers
             HomeFindingProperty homeFindingProperty;
             homeFindingProperty = _unitOfWork.HomeFindingProperties.GetHomeFindingPropertyById(id);
 
-            if (homeFindingProperty == null)
+            if (homeFindingProperty == null || !homeFindingProperty.HomeFinding.Order.HasHomeFinding)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.NotFound);
             }
@@ -161,6 +182,11 @@ namespace Odin.Controllers
         {
             HomeFindingProperty homeFindingProperty;
             homeFindingProperty = _unitOfWork.HomeFindingProperties.GetHomeFindingPropertyById(id);
+
+            if (homeFindingProperty == null || !homeFindingProperty.HomeFinding.Order.HasHomeFinding)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.NotFound);
+            }
 
             HousingPropertyViewModel viewModel = _mapper.Map<HomeFindingProperty, HousingPropertyViewModel>(homeFindingProperty);
 
