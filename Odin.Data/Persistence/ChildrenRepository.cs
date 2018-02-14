@@ -13,9 +13,22 @@ namespace Odin.Data.Persistence
             _context = context;
         }
 
-        public Child GetChildFor(string userId, string id)
+        public Child GetChildFor(string userId, string id, string userRole)
         {
-            return _context.Children.SingleOrDefault(c => c.Id == id && c.Order.ConsultantId == userId);
+            if (UserRoles.Consultant == userRole)
+            {
+                return _context.Children.SingleOrDefault(c => c.Id == id && c.Order.ConsultantId == userId);
+            }
+            else if (UserRoles.ProgramManager == userRole)
+            {
+                return _context.Children.SingleOrDefault(c => c.Id == id && c.Order.ProgramManagerId == userId);
+            }
+            else if (UserRoles.Transferee == userRole)
+            {
+                return _context.Children.SingleOrDefault(c => c.Id == id && c.Order.TransfereeId == userId);
+            }
+
+            return null;
         }
 
     }

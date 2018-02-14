@@ -51,7 +51,7 @@ var TransfereeIntakeController = function (transfereeIntakeService) {
     var orderId;
 
     var childTemplate =
-        '<div class="row intake-row collapse in" data-entity-collection="children" data-entity-id="#GUID#"> <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col"> <label>Child:</label> <span class="intake-span"></span> <input type="text" class="form-control intake-input" name="Name"/> <input type="hidden" name="Name" class="intake-hidden"/> </div> <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col"> <label>Age:</label> <span class="intake-span"></span> <input type="number" step="1" min="0" class="form-control intake-input" name="Age"/> <input type="hidden" name="Age" class="intake-hidden"/> </div> <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col"> <label>Grade:</label> <span class="intake-span"></span> <input type="number" step="1" min="0" class="form-control intake-input" name="Grade"/> <input type="hidden" name="Grade" class="intake-hidden"/> </div> <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col"> <span class="intake-del sectionDelete"> x Delete </span> </div> </div>';
+        '<div class="row intake-row collapse in" data-entity-collection="children" data-entity-id="#GUID#"> <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col"> <label>Name:</label> <span class="intake-span"></span> <input type="text" class="form-control intake-input" name="Name"/> <input type="hidden" name="Name" class="intake-hidden"/> </div> <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col"> <label>Age:</label> <span class="intake-span"></span> <input type="number" step="1" min="0" class="form-control intake-input" name="Age"/> <input type="hidden" name="Age" class="intake-hidden"/> </div> <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col"> <label>Grade:</label> <span class="intake-span"></span> <input type="number" step="1" min="0" class="form-control intake-input" name="Grade"/> <input type="hidden" name="Grade" class="intake-hidden"/> </div> <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col"> <span class="intake-del sectionDelete"> x Delete </span> </div> </div>';
 
     var petTemplate =
         '<div class="row intake-row collapse in" data-entity-id="#GUID#" data-entity-collection="pets"> <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col"> <label>Pet Type:</label> <span class="intake-span"></span> <input type="text" class="form-control intake-input" name="Type" /> <input type="hidden" class="intake-hidden" name="Type" /> </div> <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col"> <label>Breed:</label> <span class="intake-span"></span> <input type="text" class="form-control intake-input" name="Breed" /> <input type="hidden" class="intake-hidden" name="Breed" /> </div> <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col"> <label>Weight/Size:</label> <span class="intake-span"></span> <input type="text" class="form-control intake-input" name="Size" /> <input type="hidden" class="intake-hidden" name="Size" /> </div> <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col"> <span class="intake-del sectionDelete"> x Delete </span> </div></div>';
@@ -129,7 +129,7 @@ var TransfereeIntakeController = function (transfereeIntakeService) {
             spnEditSave.next(".intake-cancel").css("display", "inline");
 
             //Bind hidden values to inputs
-            inputs.css("display", "initial").each(function() {
+            inputs.css("display", "inline").each(function() {
                 var hidden = $(this).next(".intake-hidden");
                 $(this).val(hidden.val());
             });
@@ -211,9 +211,9 @@ var TransfereeIntakeController = function (transfereeIntakeService) {
 
             dates.css("display", "none");
             inputs.css("display", "none");
-            spans.css("display", "initial");
-            addSpans.css("display", "initial");
-            delSpans.css("display", "initial");
+            spans.css("display", "inline");
+            addSpans.css("display", "inline");
+            delSpans.css("display", "inline");
 
             toast("Save Successful!","success");
         }
@@ -425,9 +425,9 @@ var TransfereeIntakeController = function (transfereeIntakeService) {
         spnCancel.prev(".intake-edit").text("+ Edit");
         cols.find(".intake-input").css("display", "none").val("");
         cols.find(".date").css("display", "none").find("input").val("");
-        cols.find(".intake-span").css("display", "initial");
-        cols.find(".intake-add").css("display", "initial");
-        cols.find(".intake-del").css("display", "initial");
+        cols.find(".intake-span").css("display", "inline");
+        cols.find(".intake-add").css("display", "inline");
+        cols.find(".intake-del").css("display", "inline");
     }
 
     var toast = function (message, type) {

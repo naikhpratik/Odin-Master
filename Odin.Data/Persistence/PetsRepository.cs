@@ -13,9 +13,22 @@ namespace Odin.Data.Persistence
             _context = context;
         }
 
-        public Pet GetPetFor(string userId, string id)
+        public Pet GetPetFor(string userId, string id, string userRole)
         {
-            return _context.Pets.SingleOrDefault(p => p.Id == id && p.Order.ConsultantId == userId);
+            if (UserRoles.Consultant == userRole)
+            {
+                return _context.Pets.SingleOrDefault(p => p.Id == id && p.Order.ConsultantId == userId);
+            }
+            else if(UserRoles.ProgramManager == userRole)
+            {
+                return _context.Pets.SingleOrDefault(p => p.Id == id && p.Order.ProgramManagerId == userId);
+            }
+            else if (UserRoles.Transferee == userRole)
+            {
+                return _context.Pets.SingleOrDefault(p => p.Id == id && p.Order.TransfereeId == userId);
+            }
+
+            return null;
         }
     }
 }

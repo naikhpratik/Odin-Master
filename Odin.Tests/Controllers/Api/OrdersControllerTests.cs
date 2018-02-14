@@ -231,7 +231,7 @@ namespace Odin.Tests.Controllers.Api
             var childId = "1";
 
             Child child = new Child() { Id = childId };
-            _mockChildrenRepository.Setup(r => r.GetChildFor(_userId, childId)).Returns(child);
+            _mockChildrenRepository.Setup(r => r.GetChildFor(_userId, childId, UserRoles.Consultant)).Returns(child);
 
             var result = _controller.DeleteChild(child.Id) as IHttpActionResult;
             result.Should().BeOfType<System.Web.Http.Results.OkResult>();
@@ -244,7 +244,7 @@ namespace Odin.Tests.Controllers.Api
             var childId = "1";
 
             Child child = null;
-            _mockChildrenRepository.Setup(r => r.GetChildFor(_userId, childId)).Returns(child);
+            _mockChildrenRepository.Setup(r => r.GetChildFor(_userId, childId, UserRoles.Consultant)).Returns(child);
 
             var result = _controller.DeleteChild(childId) as IHttpActionResult;
             result.Should().BeOfType<System.Web.Http.Results.NotFoundResult>();
@@ -368,7 +368,7 @@ namespace Odin.Tests.Controllers.Api
             var petId = "1";
 
             Pet pet = new Pet() { Id = petId };
-            _mockPetsRepository.Setup(r => r.GetPetFor(_userId, petId)).Returns(pet);
+            _mockPetsRepository.Setup(r => r.GetPetFor(_userId, petId, UserRoles.Consultant)).Returns(pet);
 
             var result = _controller.DeletePet(pet.Id) as IHttpActionResult;
             result.Should().BeOfType<System.Web.Http.Results.OkResult>();
@@ -381,7 +381,7 @@ namespace Odin.Tests.Controllers.Api
             var petId = "1";
 
             Pet pet = null;
-            _mockPetsRepository.Setup(r => r.GetPetFor(_userId, petId)).Returns(pet);
+            _mockPetsRepository.Setup(r => r.GetPetFor(_userId, petId, UserRoles.Consultant)).Returns(pet);
 
             var result = _controller.DeletePet(petId) as IHttpActionResult;
             result.Should().BeOfType<System.Web.Http.Results.NotFoundResult>();
