@@ -70,7 +70,35 @@ namespace Odin.IntegrationTests.Controllers
 
         // Tests
         [Test, Isolated]
-        public void Index_ValidUrlHasOrders_ShowPmViewWithOrders()
+        public void Index_ValidUrlHasOrders_ShowBmViewWithOrders()
+        {
+            // Arrange
+            Order order = OrderBuilder.New().First();
+            order.Transferee = _transferee;
+            order.ProgramManager = _pm;
+            order.Consultant = _dsc;
+            order.HomeFinding = new HomeFinding();
+            order.ServiceFlag = (int) ServiceCategory.AccompaniedHomeFinding;
+
+            _context.Orders.Add(order);
+            _context.SaveChanges();
+            _context.Entry(order).Reload();
+
+            string url = "http://test.com";
+            _mockBookMarkletHelper.Setup(r => r.IsValidUrl(url)).Returns(true);
+            _controller.MockCurrentUserAndRole(_dsc.Id, _dsc.UserName, UserRoles.Consultant);
+
+            // Act
+            var result = _controller.Index(url) as ViewResult;
+
+            // Assert
+            result.Should().NotBeNull();
+            result.ViewName.Should().Be(String.Empty);
+        }
+
+        // Tests
+        [Test, Isolated]
+        public void Index_ValidUrlNoOrdersWithHomefinding_ShowErrorView()
         {
             // Arrange
             Order order = OrderBuilder.New().First();
@@ -90,11 +118,37 @@ namespace Odin.IntegrationTests.Controllers
 
             // Assert
             result.Should().NotBeNull();
+            result.ViewName.Should().Be("Error");
+        }
+
+        [Test, Isolated]
+        public void TransfereeIndex_ValidUrlHasOrder_ShowBmViewWithOrder()
+        {
+            // Arrange
+            Order order = OrderBuilder.New().First();
+            order.Transferee = _transferee;
+            order.ProgramManager = _pm;
+            order.Consultant = _dsc;
+            order.HomeFinding = new HomeFinding();
+            order.ServiceFlag = (int) ServiceCategory.AccompaniedHomeFinding;
+            _context.Orders.Add(order);
+            _context.SaveChanges();
+            _context.Entry(order).Reload();
+
+            string url = "http://test.com";
+            _mockBookMarkletHelper.Setup(r => r.IsValidUrl(url)).Returns(true);
+            _controller.MockCurrentUserAndRole(_transferee.Id, _transferee.UserName, UserRoles.Transferee);
+
+            // Act
+            var result = _controller.Index(url) as ViewResult;
+
+            // Assert
+            result.Should().NotBeNull();
             result.ViewName.Should().Be(String.Empty);
         }
 
         [Test, Isolated]
-        public void TransfereeIndex_ValidUrlHasOrder_ShowPmViewWithOrder()
+        public void TransfereeIndex_ValidUrlNoHomeFinding_ShowErrorView()
         {
             // Arrange
             Order order = OrderBuilder.New().First();
@@ -114,7 +168,7 @@ namespace Odin.IntegrationTests.Controllers
 
             // Assert
             result.Should().NotBeNull();
-            result.ViewName.Should().Be(String.Empty);
+            result.ViewName.Should().Be("Error");
         }
 
         [Test, Isolated]

@@ -5,6 +5,8 @@ using Odin.Data.Core.Models;
 using Odin.Interfaces;
 using System;
 using System.Web.Http;
+using Microsoft.AspNet.Identity;
+using Odin.Extensions;
 
 namespace Odin.Controllers.Api
 {
@@ -28,10 +30,17 @@ namespace Odin.Controllers.Api
         [Authorize]
         public IHttpActionResult Add(BookMarkletDto dto)
         {
-
             if (String.IsNullOrEmpty(dto.OrderId) || String.IsNullOrEmpty(dto.PropertyUrl))
             {
                 return BadRequest();
+            }
+
+            var userId = User.Identity.GetUserId();
+            var order = _unitOfWork.Orders.GetOrderFor(userId, dto.OrderId, User.GetUserRole());
+
+            if (order == null || !order.HasHomeFinding)
+            {
+                return NotFound();
             }
 
             var queueEntry = _mapper.Map<BookMarkletDto, PropBotJobQueueEntry>(dto);

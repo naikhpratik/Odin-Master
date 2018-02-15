@@ -49,13 +49,16 @@
                     <span>Itinerary</span>
                 </a>
             </li>
-            <hr class="transfereeSideNav__rule"/>
-            <li class="item nav-item" data-panel="help">
-                <a href="#help">
-                    <img src="~/Content/Images/icn_internal_itinerary.png"/>
-                    <span>Help / FAQ</span>
-                </a>
-            </li>
+            @if (Model.HasHomeFinding)
+            {
+                <hr class="transfereeSideNav__rule"/>
+                <li class="item nav-item" data-panel="help">
+                    <a href="#help">
+                        <img src="~/Content/Images/icn_internal_itinerary.png"/>
+                        <span>Help / FAQ</span>
+                    </a>
+                </li>
+            }
         </ul>
     </div>
 </div>

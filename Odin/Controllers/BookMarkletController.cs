@@ -1,13 +1,11 @@
 ﻿using AutoMapper;
 using Microsoft.AspNet.Identity;
 using Odin.Data.Core;
-using Odin.Data.Core.Dtos;
 using Odin.Data.Core.Models;
 using Odin.Extensions;
 using Odin.Filters;
 using Odin.Interfaces;
 using Odin.ViewModels.BookMarklet;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
@@ -35,7 +33,7 @@ namespace Odin.Controllers
         public ActionResult Index(string url)
         {
             var userId = User.Identity.GetUserId();
-            IEnumerable<Order> orders = _unitOfWork.Orders.GetOrdersFor(userId,User.GetUserRole());
+            IEnumerable<Order> orders = _unitOfWork.Orders.GetOrdersFor(userId,User.GetUserRole()).Where(o => o.HasHomeFinding);
 
             if (orders.Count() == 0)
             {
@@ -61,24 +59,5 @@ namespace Odin.Controllers
             }
             
         }
-
-        [HttpPost]
-        public ActionResult Index(BookMarkletDto dto)
-        {
-            if (String.IsNullOrEmpty(dto.OrderId) || String.IsNullOrEmpty(dto.PropertyUrl))
-            {
-                BookMarkletErrorViewModel error = new BookMarkletErrorViewModel();
-                error.Header = "Uh oh!";
-                error.Message = "It looks like something went wrong.  Please try again.";
-                return View("Error", error);
-            }
-
-            var queueEntry = _mapper.Map<BookMarkletDto, PropBotJobQueueEntry>(dto);
-            _queueStore.Add(queueEntry);
-
-            //var vm = _mapper.Map<BookMarkletDto, BookMarkletAddViewModel>(dto);
-            return View();
-        }
-        
     }
 }

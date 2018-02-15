@@ -46,13 +46,27 @@ namespace Odin.Tests.Controllers
         {
             var url = "http://test.com";
 
-            var orders = new List<Order> {new Order() {Id = "1"}};
+            var orders = new List<Order> {new Order() {Id = "1", HomeFinding = new HomeFinding(), ServiceFlag = (int)ServiceCategory.AccompaniedHomeFinding}};
             _mockRepository.Setup(r => r.GetOrdersFor(_userId,UserRoles.Consultant)).Returns(orders);
             _mockBookMarkletHelper.Setup(r => r.IsValidUrl(url)).Returns(true);
 
             var result = _controller.Index(url) as ViewResult;
             result.Should().NotBeNull();
             result.ViewName.Should().BeEmpty();
+        }
+
+        [TestMethod]
+        public void Index_NoHomeFinding_ShouldReturnErrorView()
+        {
+            var url = "http://test.com";
+
+            var orders = new List<Order> { new Order() { Id = "1" } };
+            _mockRepository.Setup(r => r.GetOrdersFor(_userId, UserRoles.Consultant)).Returns(orders);
+            _mockBookMarkletHelper.Setup(r => r.IsValidUrl(url)).Returns(true);
+
+            var result = _controller.Index(url) as ViewResult;
+            result.Should().NotBeNull();
+            result.ViewName.Should().Be("Error");
         }
 
         [TestMethod]
