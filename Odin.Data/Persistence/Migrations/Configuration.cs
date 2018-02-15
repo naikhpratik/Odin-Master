@@ -44,6 +44,7 @@ namespace Odin.Data.Persistence.Migrations
             PopulateSeContactUids(context);
             SeedHomeFindingPropertiesIfNone(context);
             CreateOrderWithTransferee(context);
+            SeedHomeFindingServiceFlag(context);
         }
 
         private void PopulateSeContactUids(ApplicationDbContext context)
@@ -1274,5 +1275,21 @@ namespace Odin.Data.Persistence.Migrations
             }
         }
 
+        private void SeedHomeFindingServiceFlag(ApplicationDbContext context)
+        {
+            //Get the first five test orders
+            var testOrders = context.Orders
+                .Include(o => o.Consultant)
+                .Where(o => o.Consultant.Email.Equals(_odinConsultantUserName)).OrderBy(o => o.Id).Take(5);
+
+            foreach (var testOrder in testOrders)
+            {
+                testOrder.ServiceFlag = (int) ServiceCategory.AccompaniedHomeFinding;
+            }
+
+            context.SaveChanges();
+        }
+
     }
 }
+    

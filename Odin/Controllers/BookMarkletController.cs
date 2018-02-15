@@ -39,7 +39,7 @@ namespace Odin.Controllers
             {
                 BookMarkletErrorViewModel error = new BookMarkletErrorViewModel();
                 error.Header = "Sorry!";
-                error.Message = "It looks like you don't have any orders yet!";
+                error.Message = "It looks like you don't have any homefinding orders!";
                 return View("Error", error);
             }
 
