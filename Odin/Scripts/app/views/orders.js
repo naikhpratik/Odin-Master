@@ -83,11 +83,11 @@
         });
 
         $("#preTripDateSort").click(function () {
-            sortCol($(this), "preTripDate", function (a) { return new Date(a) });
+            sortCol($(this), "preTripDate", function (a) { return getDate(a) });
         });
 
         $("#estimatedArrivalDateSort").click(function () {
-            sortCol($(this), "estimatedArrivalDate", function (a) { return new Date(a) });
+            sortCol($(this), "estimatedArrivalDate", function (a) { return getDate(a) });
         });
 
         $("#notificationsSort").click(function () {
@@ -96,7 +96,7 @@
 
 
         //Default sort. Move to server?
-        sortCol($("#estimatedArrivalDateSort"), "estimatedArrivalDate", function (a) { return new Date(a) });
+        sortCol($("#estimatedArrivalDateSort"), "estimatedArrivalDate", function (a) { return getDate(a) });
     }
 
     var sortCol = function (headerElt, dataName, sortFunc) {
@@ -236,6 +236,20 @@
     var loadProgressBar = function (pbElt) {
         pbElt.find(".progressBar__sched").width(pbElt.attr("data-sched-percent"));
         pbElt.find(".progressBar__comp").width(pbElt.attr("data-comp-percent"));
+    }
+
+    //https://stackoverflow.com/questions/23532270/date-format-conversion-from-dd-mmm-yyyy-to-dd-mm-yyyy-in-javascript?noredirect=1&lq=1
+    var getDate = function (str) {
+        if (str) {
+            var arr = str.split("-");
+            var months = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"];
+
+            var month = months.indexOf(arr[1].toLowerCase());
+
+            return new Date(parseInt(arr[2]), month, parseInt(arr[0]));
+        } else {
+            return new Date();
+        }
     }
 
     return {
