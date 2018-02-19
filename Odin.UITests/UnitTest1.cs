@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace Odin.UITests
 {
-    [TestClass]
+    //[TestClass]
     public class UnitTest1
     {
         private string baseURL = "http://localhost:49986";
@@ -22,7 +22,7 @@ namespace Odin.UITests
             driver.Manage().Window.Maximize();
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(30);
             driver.Navigate().GoToUrl(this.baseURL);
-           
+
             Login("austin.emser@dwellworks.com", "Consultant5$");
             Logout();
         }
