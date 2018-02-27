@@ -54,6 +54,7 @@ namespace Odin.Data.Persistence
             return _context.Orders
                 .Where(o => o.TrackingId.Equals(trackingId))
                 .Include(o => o.Services)
+                .Include(o => o.HomeFinding)
                 .SingleOrDefault<Order>();
         }
 
